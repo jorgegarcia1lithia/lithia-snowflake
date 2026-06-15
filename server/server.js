@@ -33,16 +33,21 @@ const connection = snowflake.createConnection({
   
 // Establish a connection.
 connection.connect((err, conn) => {
-    //console("err:", err);
-    //console("conn:", conn);
+    if (err) {
+        // Handle any errors.
+        console.log("Error TEST: \n\n");
+        console.log(err);
+      } else {
+        // Execute SQL statements.
+        const statement = connection.execute({
+            "statement": "select * from STAGING.STG_SFMC_EXPRESSENTRYAUDIENCE;"
+        });
+        console.log("statement \n\n");
+        console.log(statement);
+      }
 });
   
-  // Execute SQL statements.
-const statement = connection.execute({
-    "statement": "select * from STAGING.STG_SFMC_EXPRESSENTRYAUDIENCE;"
-});
-console.log("statement \n\n");
-console.log(statement);
+// Execute SQL statements.
 const app = express();
 
 app.get('/', (req, res) => {
