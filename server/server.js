@@ -73,7 +73,7 @@ app.get('/', (req, res) => {
 
 app.post('/slitnow', (req, res) => {
     const userData = req.body;
-    res.send(userData);
+
     console.log(userData); 
 
     // Send a success response back to the client
