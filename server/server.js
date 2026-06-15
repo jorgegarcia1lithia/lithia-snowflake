@@ -6,6 +6,11 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 
+import snowflake from 'snowflake-sdk';
+
+const privateKey = Buffer.from(process.env.privateKey, 'base64').toString('utf-8');
+console.log(privateKey);
+
 const app = express();
 
 app.get('/', (req, res) => {
