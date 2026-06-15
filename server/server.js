@@ -35,14 +35,14 @@ const connection = snowflake.createConnection({
 connection.connect((err, conn) => {
     if (err) {
         // Handle any errors.
-        console.log("Error TEST: \n\n");
+        console.log("Error TEST JG:");
         console.log(err);
       } else {
         // Execute SQL statements.
         const statement = connection.execute({
             "statement": "select * from STAGING.STG_SFMC_EXPRESSENTRYAUDIENCE;"
         });
-        console.log("statement \n\n");
+        console.log("statement JG:");
         console.log(statement);
       }
 });
