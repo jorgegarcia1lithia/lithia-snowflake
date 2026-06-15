@@ -39,7 +39,7 @@ connection.connect((err, conn) => {
         console.log(err);
     } else {
         const statement = connection.execute({
-            sqlText: 'select * from STAGING.STG_SFMC_EXPRESSENTRYAUDIENCE',
+            sqlText: "CALL MARKETING_PROD.BIZ.SP_CUSTOMER_360_LOOKUP(P_VIN => '5FNRL6H78JB025038');",
             complete: function (err, stmt, rows) {
                 if (err) {
                     console.error(`Failed to execute statement due to the following error: ${err.message}`);
