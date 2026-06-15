@@ -19,6 +19,13 @@ app.post('/slitnow', (req, res) => {
     const requestData = req.body;
     console.log(requestData);
 
+    console.log("requestData.passphrase");
+    console.log(requestData.passphrase);
+
+    res.status(201).json({
+        data: requestData
+    });
+
     /*const privateKeyFile = Buffer.from(process.env.privateKey, 'base64').toString('utf-8');
 
     const privateKeyObject = crypto.createPrivateKey({
