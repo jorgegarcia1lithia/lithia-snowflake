@@ -74,6 +74,13 @@ app.get('/', (req, res) => {
 app.post('/slitnow', (req, res) => {
     const userData = req.body;
     res.send(userData);
+    console.log(userData); 
+
+    // Send a success response back to the client
+    res.status(201).json({
+        message: 'User created successfully',
+        data: userData
+    });
 });
 
 const PORT = process.env.PORT || 5000;
