@@ -17,16 +17,16 @@ app.get('/', (req, res) => {
 
 app.post('/slitnow', (req, res) => {
     const requestData = req.body;
-    console.log(requestData);
+    /*console.log(requestData);
 
     console.log("requestData.passphrase");
     console.log(requestData.passphrase);
 
     res.status(201).json({
         data: requestData
-    });
+    });*/
 
-    /*const privateKeyFile = Buffer.from(process.env.privateKey, 'base64').toString('utf-8');
+    const privateKeyFile = Buffer.from(process.env.privateKey, 'base64').toString('utf-8');
 
     const privateKeyObject = crypto.createPrivateKey({
         key: privateKeyFile,
@@ -55,6 +55,12 @@ app.post('/slitnow', (req, res) => {
             // Handle any errors.
             console.log("Error TEST JG:");
             console.log(err);
+
+            res.status(201).json({
+                message: 'connection error',
+                data: err
+            });
+
         } else {
             const statement = connection.execute({
                 sqlText: requestData.sqlText,
@@ -83,7 +89,7 @@ app.post('/slitnow', (req, res) => {
                 }
             });
         }
-    });*/
+    });
 });
 
 const PORT = process.env.PORT || 5000;
