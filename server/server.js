@@ -33,15 +33,16 @@ const connection = snowflake.createConnection({
   
 // Establish a connection.
 connection.connect((err, conn) => {
-    console("err:", err);
-    console("conn:", conn);
+    //console("err:", err);
+    //console("conn:", conn);
 });
   
   // Execute SQL statements.
 const statement = connection.execute({
-    "statement": "CALL MARKETING_PROD.BIZ.SP_CUSTOMER_360_LOOKUP(P_VIN => '5FNRL6H78JB025038');"
+    "statement": "select * from STAGING.STG_SFMC_EXPRESSENTRYAUDIENCE;"
 });
-console.log("statement", statement);
+console.log("statement \n\n");
+console.log(statement);
 const app = express();
 
 app.get('/', (req, res) => {
