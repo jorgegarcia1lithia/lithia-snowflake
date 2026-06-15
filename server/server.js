@@ -71,5 +71,10 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+app.post('/slitnow', (req, res) => {
+    const userData = req.body;
+    res.send(userData);
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {console.log("TEST snowflake Server started on port " + PORT)});
