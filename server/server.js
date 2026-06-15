@@ -17,8 +17,9 @@ app.get('/', (req, res) => {
 
 app.post('/slitnow', (req, res) => {
     const requestData = req.body;
+    console.log(requestData);
 
-    const privateKeyFile = Buffer.from(process.env.privateKey, 'base64').toString('utf-8');
+    /*const privateKeyFile = Buffer.from(process.env.privateKey, 'base64').toString('utf-8');
 
     const privateKeyObject = crypto.createPrivateKey({
         key: privateKeyFile,
@@ -75,7 +76,7 @@ app.post('/slitnow', (req, res) => {
                 }
             });
         }
-    });
+    });*/
 });
 
 const PORT = process.env.PORT || 5000;
