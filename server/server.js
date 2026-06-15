@@ -37,14 +37,20 @@ connection.connect((err, conn) => {
         // Handle any errors.
         console.log("Error TEST JG:");
         console.log(err);
-      } else {
-        // Execute SQL statements.
+    } else {
         const statement = connection.execute({
-            "statement": "select * from STAGING.STG_SFMC_EXPRESSENTRYAUDIENCE;"
+            sqlText: 'select * from STAGING.STG_SFMC_EXPRESSENTRYAUDIENCE',
+            complete: function (err, stmt, rows) {
+                if (err) {
+                    console.error(`Failed to execute statement due to the following error: ${err.message}`);
+                } else {
+                    console.log(`Successfully executed statement: ${stmt.getSqlText()}`);
+                }
+            }
         });
-        console.log("statement JG:");
-        console.log(statement);
-      }
+        //console.log("statement JG:");
+        //console.log(statement);
+    }
 });
   
 // Execute SQL statements.
