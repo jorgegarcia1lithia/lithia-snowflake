@@ -13,7 +13,7 @@ const privateKeyFile = Buffer.from(process.env.privateKey, 'base64').toString('u
 const privateKeyObject = crypto.createPrivateKey({
     key: privateKeyFile,
     format: 'pem',
-    passphrase: 'x1tH!@1!26'
+    passphrase: process.env.passphrase
 });
 
 // Extract the private key from the object as a PEM-encoded string.
@@ -24,6 +24,9 @@ const privateKey = privateKeyObject.export({
   
 // Use the private key for authentication.
 const connection = snowflake.createConnection({
+    account: process.env.account,
+    username: process.env.user,
+    role: process.env.role,
     authenticator: 'SNOWFLAKE_JWT',
     privateKey: privateKey
 });
