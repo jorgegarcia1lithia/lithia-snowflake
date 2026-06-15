@@ -40,11 +40,22 @@ connection.connect((err, conn) => {
     } else {
         const statement = connection.execute({
             sqlText: "CALL MARKETING_PROD.BIZ.SP_CUSTOMER_360_LOOKUP(P_VIN => '5FNRL6H78JB025038');",
-            complete: function (err, stmt, rows) {
+            asyncExec: true,
+            complete: async function (err, stmt, rows) {
                 if (err) {
                     console.error(`Failed to execute statement due to the following error: ${err.message}`);
                 } else {
                     console.log(`Successfully executed statement: ${stmt.getSqlText()}`);
+                    console.log(`rows: ${stmt.getSqlText()}`);
+
+                    const queryId = stmt.getQueryId();
+
+                    connection.getResultsFromQueryId({
+                        queryId: queryId,
+                        complete: async function (err, _stmt, rows) {
+                            console.log(rows);
+                        }
+                    });
                 }
             }
         });
