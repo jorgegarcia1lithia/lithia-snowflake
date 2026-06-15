@@ -43,7 +43,7 @@ app.post('/slitnow', (req, res) => {
     // Use the private key for authentication.
     const connection = snowflake.createConnection({
         account: requestData.account,
-        username: requestData.user,
+        username: requestData.username,
         role: requestData.role,
         authenticator: requestData.authenticator,
         privateKey: privateKey
