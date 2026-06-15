@@ -6,10 +6,39 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const snowflake = require('snowflake-sdk');
+const crypto = require('crypto');
 
-const privateKey = Buffer.from(process.env.privateKey, 'base64').toString('utf-8');
-console.log(privateKey);
+const privateKeyFile = Buffer.from(process.env.privateKey, 'base64').toString('utf-8');
 
+const privateKeyObject = crypto.createPrivateKey({
+    key: privateKeyFile,
+    format: 'pem',
+    passphrase: 'x1tH!@1!26'
+});
+
+// Extract the private key from the object as a PEM-encoded string.
+const privateKey = privateKeyObject.export({
+    format: 'pem',
+    type: 'pkcs8'
+});
+  
+// Use the private key for authentication.
+const connection = snowflake.createConnection({
+    authenticator: 'SNOWFLAKE_JWT',
+    privateKey: privateKey
+});
+  
+// Establish a connection.
+connection.connect((err, conn) => {
+    console("err:", err);
+    console("conn:", conn);
+});
+  
+  // Execute SQL statements.
+const statement = connection.execute({
+    "statement": "CALL MARKETING_PROD.BIZ.SP_CUSTOMER_360_LOOKUP(P_VIN => '5FNRL6H78JB025038');"
+});
+console.log("statement", statement);
 const app = express();
 
 app.get('/', (req, res) => {
